@@ -12,9 +12,8 @@ jobs:
       azure-sp-tenant:
         type: env_var_name
         default: AZURE_SP_TENANT
-    executor: azure-cli/default
+    executor: azure-cli/azure-docker
     steps:
-      - azure-cli/azure-docker
       - run:
          name: Login to Azure.
          command: |

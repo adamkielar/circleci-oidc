@@ -1,0 +1,33 @@
+version: 2.1
+
+orbs:
+  azure-cli: circleci/azure-cli@1.2.2
+
+jobs:
+  circleci-oidc:
+    parameters:
+      azure-sp:
+        type: env_var_name
+        default: AZURE_SP
+      azure-sp-tenant:
+        type: env_var_name
+        default: AZURE_SP_TENANT
+    executor: azure-cli/default
+    steps:
+      - run:
+         name: Login to Azure.
+         command: |
+           az login --service-principal \
+           --username << parameters.azure-sp >> \
+           --tenant << parameters.azure-sp-tenant >> \ 
+           --federated-token $CIRCLE_OIDC_TOKEN
+      - run:
+         name: Check Azure account.
+         command: az account show
+
+workflows:
+  main:
+   jobs:
+    - circleci-oidc:
+       context:
+        - just_oidc

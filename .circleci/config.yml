@@ -14,7 +14,7 @@ jobs:
         default: AZURE_SP_TENANT
     executor: azure-cli/default
     steps:
-      - azure-cli/install
+      - azure-cli/azure-docker
       - run:
          name: Login to Azure.
          command: |

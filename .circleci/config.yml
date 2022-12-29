@@ -17,10 +17,10 @@ jobs:
       - run:
          name: Login to Azure.
          command: |
-           az login --service-principal \
-           --username << parameters.azure-sp >> \
-           --tenant << parameters.azure-sp-tenant >> \ 
-           --federated-token $CIRCLE_OIDC_TOKEN
+            az login --service-principal \
+            --username << parameters.azure-sp >> \
+            --tenant << parameters.azure-sp-tenant >> \
+            --federated-token ${CIRCLE_OIDC_TOKEN}
       - run:
          name: Check Azure account.
          command: az account show
